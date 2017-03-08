@@ -62,14 +62,10 @@ def send_request(request):
         try:
             send_mail(content,subject,tos)
             json_data = {'status': '1', 'info': 'send success'}
-            #true_jdata = {'status':'0','info':'send success'}
-            #return HttpResponse(json.dumps(true_jdata), content_type='application/json')
         except Exception,e:
             exception_str = str(e)
             jdata_str = 'send failed'+ exception_str
             json_data = {'status': '2', 'info': jdata_str}
-            #error_jdata = {'status':'1','info':jdata_str}
-            #return HttpResponse(json.dumps(error_jdata), content_type='application/json')
         return HttpResponse(json.dumps(json_data), content_type='application/json')
     else:
         method_error_jdata = {'status':'3','info':'request failed,only accept POST method'}
